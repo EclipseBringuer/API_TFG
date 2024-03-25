@@ -16,6 +16,6 @@ public class TfgApiApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(TfgApiApplication.class, args);
-		Utility.openDocumentation();
+		//Utility.openDocumentation();
 	}
 }
