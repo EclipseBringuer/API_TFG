@@ -1,6 +1,5 @@
 package com.grl.TFG_API;
 
-import com.grl.TFG_API.utilities.Utility;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +15,5 @@ public class TfgApiApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(TfgApiApplication.class, args);
-		//Utility.openDocumentation();
 	}
 }
