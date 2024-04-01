@@ -1,6 +1,7 @@
 package com.grl.TFG_API.controllers;
 
 import com.grl.TFG_API.model.entity.User;
+import com.grl.TFG_API.services.SecurityService;
 import com.grl.TFG_API.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     @Autowired
     private UserService service;
+    @Autowired
+    private SecurityService securityService;
 
     @Operation(summary = "Devulve un usuario por sus credenciales")
     @GetMapping("/{gmail}/{password}")
