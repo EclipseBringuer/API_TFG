@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.io.Serializable;
 
 @Entity
@@ -20,17 +21,20 @@ public class Product implements Serializable {
     private String photo;
     @Column(name = "description")
     private String description;
+    @Column(name = "category")
+    private String category;
 
-    public Product(){
+    public Product() {
 
     }
 
-    public Product(Integer id, String name, Double price, String photo, String description) {
+    public Product(Integer id, String name, Double price, String photo, String description, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.photo = photo;
         this.description = description;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -73,6 +77,14 @@ public class Product implements Serializable {
         this.description = description;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -81,6 +93,7 @@ public class Product implements Serializable {
                 ", price=" + price +
                 ", photo='" + photo + '\'' +
                 ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }
