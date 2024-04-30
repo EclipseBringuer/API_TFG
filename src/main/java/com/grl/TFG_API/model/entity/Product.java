@@ -19,7 +19,7 @@ public class Product implements Serializable {
     @Column(name = "price")
     private Double price;
     @Column(name = "photo")
-    private Byte[] photo;
+    private byte[] photo;
     @Column(name = "description")
     private String description;
     @Column(name = "category")
@@ -29,7 +29,7 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Integer id, String name, Double price, Byte[] photo, String description, String category) {
+    public Product(Integer id, String name, Double price, byte[] photo, String description, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -62,11 +62,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Byte[] getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Byte[] photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
