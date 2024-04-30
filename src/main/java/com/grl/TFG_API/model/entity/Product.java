@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "product")
@@ -18,7 +19,7 @@ public class Product implements Serializable {
     @Column(name = "price")
     private Double price;
     @Column(name = "photo")
-    private String photo;
+    private Byte[] photo;
     @Column(name = "description")
     private String description;
     @Column(name = "category")
@@ -28,7 +29,7 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Integer id, String name, Double price, String photo, String description, String category) {
+    public Product(Integer id, String name, Double price, Byte[] photo, String description, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -61,11 +62,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getPhoto() {
+    public Byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Byte[] photo) {
         this.photo = photo;
     }
 
@@ -91,7 +92,7 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", photo='" + photo + '\'' +
+                ", photo='" + Arrays.toString(photo) + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
                 '}';
