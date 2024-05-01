@@ -2,6 +2,7 @@ package com.grl.TFG_API.model.entity;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,13 @@ public class User implements Serializable {
     private List<Order> orders;
 
     public User() {
-
+        this.id = 0;
+        this.name = "";
+        this.gmail = "";
+        this.password = "";
+        this.phone = "";
+        this.address = "";
+        this.orders = new ArrayList<>();
     }
 
     public User(Integer id, String name, String gmail, String password, String phone, String address, List<Order> orders) {

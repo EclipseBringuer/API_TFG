@@ -15,6 +15,11 @@ public class UserService {
     }
 
     public User getByCredentials(String gmail, String password) {
-        return repository.getUserByGmailAndPassword(gmail, password);
+        User output = new User();
+        var user = repository.getUserByGmailAndPassword(gmail, password);
+        if (user != null) {
+            output = user;
+        }
+        return output;
     }
 }

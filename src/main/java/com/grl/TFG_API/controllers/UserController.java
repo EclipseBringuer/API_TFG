@@ -23,6 +23,7 @@ public class UserController {
     @Operation(summary = "Devulve un usuario por sus credenciales")
     @GetMapping("/{gmail}/{password}")
     public ResponseEntity<User> getUserByCredentials(@PathVariable String gmail, @PathVariable String password) {
-        return new ResponseEntity<>(service.getByCredentials(gmail, password), HttpStatus.OK);
+        var user  = service.getByCredentials(gmail, password);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
