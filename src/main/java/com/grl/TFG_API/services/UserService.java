@@ -22,4 +22,8 @@ public class UserService {
         }
         return output;
     }
+
+    public User saveNewUser(User newUser) {
+        return repository.save(newUser);
+    }
 }
