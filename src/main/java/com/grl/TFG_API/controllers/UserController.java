@@ -5,7 +5,6 @@ import com.grl.TFG_API.model.entity.User;
 import com.grl.TFG_API.services.SecurityService;
 import com.grl.TFG_API.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
