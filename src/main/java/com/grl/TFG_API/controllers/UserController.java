@@ -1,5 +1,6 @@
 package com.grl.TFG_API.controllers;
 
+import com.grl.TFG_API.model.dto.NewUserDTO;
 import com.grl.TFG_API.model.entity.User;
 import com.grl.TFG_API.services.SecurityService;
 import com.grl.TFG_API.services.UserService;
@@ -25,7 +26,7 @@ public class UserController {
 
     @Operation(summary = "Guarda un nuevo usuario en la base de datos y lo devuelve con el id actualizado")
     @PostMapping("/new")
-    public ResponseEntity<User> createNewUser(@RequestParam("token") String token, @RequestBody User newUser) {
+    public ResponseEntity<User> createNewUser(@RequestParam("token") String token, @RequestBody NewUserDTO newUser) {
         if (SecurityService.isTokenValid(token)) {
             return new ResponseEntity<>(service.saveNewUser(newUser), HttpStatus.CREATED);
         } else {

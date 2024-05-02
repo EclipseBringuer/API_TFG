@@ -1,5 +1,6 @@
 package com.grl.TFG_API.services;
 
+import com.grl.TFG_API.model.dto.NewUserDTO;
 import com.grl.TFG_API.model.entity.User;
 import com.grl.TFG_API.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,17 @@ public class UserService {
         return output;
     }
 
-    public User saveNewUser(User newUser) {
-        return repository.save(newUser);
+    public User saveNewUser(NewUserDTO newUser) {
+        return repository.save(convertNewUserDTOIntoUser(newUser));
+    }
+
+    private User convertNewUserDTOIntoUser(NewUserDTO newUserDTO) {
+        User user = new User();
+        user.setName(newUserDTO.name());
+        user.setAddress(newUserDTO.address());
+        user.setPassword(newUserDTO.password());
+        user.setPhone(newUserDTO.phone());
+        user.setGmail(newUserDTO.gmail());
+        return user;
     }
 }
