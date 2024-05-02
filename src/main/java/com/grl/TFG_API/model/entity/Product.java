@@ -1,9 +1,7 @@
 package com.grl.TFG_API.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -11,6 +9,7 @@ import java.util.Arrays;
 @Table(name = "product")
 public class Product implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "menu_name")

@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name = "item")
 public class Item implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "amount")
