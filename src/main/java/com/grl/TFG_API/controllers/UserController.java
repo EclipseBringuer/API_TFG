@@ -31,7 +31,7 @@ public class UserController {
             if (output.getId() != 0) {
                 return new ResponseEntity<>(output, HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<>(output, HttpStatus.FOUND);
+                return new ResponseEntity<>(output, HttpStatus.OK);
             }
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
