@@ -25,7 +25,11 @@ public class UserService {
     }
 
     public User saveNewUser(NewUserDTO newUser) {
-        return repository.save(convertNewUserDTOIntoUser(newUser));
+        var output = new User();
+        if(!repository.existsByGmail(newUser.gmail())){
+            output = repository.save(convertNewUserDTOIntoUser(newUser));
+        }
+        return output;
     }
 
     private User convertNewUserDTOIntoUser(NewUserDTO newUserDTO) {

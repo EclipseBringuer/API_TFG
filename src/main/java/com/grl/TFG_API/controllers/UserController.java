@@ -27,7 +27,12 @@ public class UserController {
     @PostMapping("/new")
     public ResponseEntity<User> createNewUser(@RequestParam("token") String token, @RequestBody NewUserDTO newUser) {
         if (SecurityService.isTokenValid(token)) {
-            return new ResponseEntity<>(service.saveNewUser(newUser), HttpStatus.CREATED);
+            var output = service.saveNewUser(newUser);
+            if (output.getId() != 0) {
+                return new ResponseEntity<>(output, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(output, HttpStatus.CONFLICT);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
