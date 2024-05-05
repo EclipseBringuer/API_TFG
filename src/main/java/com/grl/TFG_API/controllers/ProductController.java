@@ -27,4 +27,13 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @GetMapping("/getCategories")
+    public ResponseEntity<List<String>> getAllCategories(@RequestParam("token") String token) {
+        if (SecurityService.isTokenValid(token)) {
+            return new ResponseEntity<>(service.getAllCategories(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
 }
