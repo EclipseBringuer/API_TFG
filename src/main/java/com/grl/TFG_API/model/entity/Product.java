@@ -1,9 +1,7 @@
 package com.grl.TFG_API.model.entity;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "product")
@@ -17,7 +15,7 @@ public class Product implements Serializable {
     @Column(name = "price")
     private Double price;
     @Column(name = "photo")
-    private byte[] photo;
+    private Integer photo;
     @Column(name = "description")
     private String description;
     @Column(name = "category")
@@ -27,7 +25,7 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Integer id, String name, Double price, byte[] photo, String description, String category) {
+    public Product(Integer id, String name, Double price, Integer photo, String description, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -60,11 +58,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public byte[] getPhoto() {
+    public Integer getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(Integer photo) {
         this.photo = photo;
     }
 
@@ -90,7 +88,7 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", photo='" + Arrays.toString(photo) + '\'' +
+                ", photo='" + photo + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
                 '}';
