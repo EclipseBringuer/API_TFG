@@ -27,7 +27,13 @@ public class ProductService {
 
     public void updateProducts(List<DTOProduct> list) {
         for (DTOProduct item : list) {
-            repository.updateProductPhoto(item.id(), item.image());
+            try {
+                var output = repository.findById(103).get();
+                output.setPhoto(item.image());
+                repository.save(output);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }
