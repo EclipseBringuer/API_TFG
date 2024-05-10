@@ -1,5 +1,6 @@
 package com.grl.TFG_API.services;
 
+import com.grl.TFG_API.model.dto.DTOProduct;
 import com.grl.TFG_API.model.entity.Product;
 import com.grl.TFG_API.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     @Autowired
     public ProductService(ProductRepository repository) {
@@ -22,5 +23,11 @@ public class ProductService {
 
     public List<String> getAllCategories() {
         return repository.getDistinctCategories();
+    }
+
+    public void updateProducts(List<DTOProduct> list) {
+        for (DTOProduct item : list) {
+            repository.updateProductPhoto(item.id(), item.image());
+        }
     }
 }
