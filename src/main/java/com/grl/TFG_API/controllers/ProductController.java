@@ -1,6 +1,5 @@
 package com.grl.TFG_API.controllers;
 
-import com.grl.TFG_API.model.dto.DTOProduct;
 import com.grl.TFG_API.model.entity.Product;
 import com.grl.TFG_API.services.ProductService;
 import com.grl.TFG_API.services.SecurityService;
@@ -33,11 +32,5 @@ public class ProductController {
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-    }
-
-    @PostMapping("/updatePhotos")
-    public ResponseEntity<String> updatePhotos(@RequestBody List<DTOProduct> list) {
-        service.updateProducts(list);
-        return new ResponseEntity<>("Todo bien", HttpStatus.OK);
     }
 }

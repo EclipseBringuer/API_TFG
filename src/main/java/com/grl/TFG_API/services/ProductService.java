@@ -1,11 +1,9 @@
 package com.grl.TFG_API.services;
 
-import com.grl.TFG_API.model.dto.DTOProduct;
 import com.grl.TFG_API.model.entity.Product;
 import com.grl.TFG_API.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -23,17 +21,5 @@ public class ProductService {
 
     public List<String> getAllCategories() {
         return repository.getDistinctCategories();
-    }
-
-    public void updateProducts(List<DTOProduct> list) {
-        for (DTOProduct item : list) {
-            try {
-                var output = repository.findById(103).get();
-                output.setPhoto(item.image());
-                repository.save(output);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
     }
 }
