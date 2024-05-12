@@ -16,23 +16,21 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @Operation(summary = "Devulve un usuario por sus credenciales")
+    @Operation(summary = "Devuelve un usuario por sus credenciales")
     @GetMapping("/{gmail}/{password}")
-    public ResponseEntity<User> getUserByCredentials(@PathVariable String gmail, @PathVariable String password) {
-        var user = service.getByCredentials(gmail, password);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<User> getUserByCredentials(@RequestParam("token") String token, @PathVariable String gmail, @PathVariable String password) {
+        if (SecurityService.isTokenValid(token)) {
+            return new ResponseEntity<>(service.getByCredentials(gmail, password), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @Operation(summary = "Guarda un nuevo usuario en la base de datos y lo devuelve con el id actualizado")
     @PostMapping("/new")
     public ResponseEntity<User> createNewUser(@RequestParam("token") String token, @RequestBody NewUserDTO newUser) {
         if (SecurityService.isTokenValid(token)) {
-            var output = service.saveNewUser(newUser);
-            if (output.getId() != 0) {
-                return new ResponseEntity<>(output, HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(output, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(service.saveNewUser(newUser), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
