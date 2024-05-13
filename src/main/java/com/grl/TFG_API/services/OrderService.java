@@ -16,8 +16,8 @@ public class OrderService {
         this.repository = repository;
     }
 
-    public Order createNewOrder(NewOrderDTO newOrderDTO) {
-        return repository.save(convertOrderDTOToOrder(newOrderDTO));
+    public NewOrderDTO createNewOrder(NewOrderDTO newOrderDTO) {
+        return convertOrderToDTO(repository.save(convertOrderDTOToOrder(newOrderDTO)));
     }
 
     private Order convertOrderDTOToOrder(NewOrderDTO newOrderDTO) {
@@ -31,5 +31,12 @@ public class OrderService {
             item.setOrder(output);
         }
         return output;
+    }
+
+    private NewOrderDTO convertOrderToDTO(Order order){
+        for (Item item : order.getItems()) {
+            item.setOrder(null);
+        }
+        return new NewOrderDTO(order.getId(), order.getPrice(), order.getPaymentMethod(), order.getItems(), null);
     }
 }

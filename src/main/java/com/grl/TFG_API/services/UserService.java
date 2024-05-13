@@ -20,6 +20,7 @@ public class UserService {
         var user = repository.getUserByGmailAndPassword(gmail, password);
         if (user != null) {
             output = user;
+            output.setOrders(null);
         }
         return output;
     }

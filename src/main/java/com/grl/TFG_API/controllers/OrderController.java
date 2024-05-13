@@ -1,7 +1,6 @@
 package com.grl.TFG_API.controllers;
 
 import com.grl.TFG_API.model.dto.NewOrderDTO;
-import com.grl.TFG_API.model.entity.Order;
 import com.grl.TFG_API.services.OrderService;
 import com.grl.TFG_API.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class OrderController {
     private OrderService service;
 
     @PostMapping("/new")
-    public ResponseEntity<Order> createNewOrder(@RequestParam("token") String token, @RequestBody NewOrderDTO orderDTO) {
+    public ResponseEntity<NewOrderDTO> createNewOrder(@RequestParam("token") String token, @RequestBody NewOrderDTO orderDTO) {
         if (SecurityService.isTokenValid(token)) {
             return new ResponseEntity<>(service.createNewOrder(orderDTO), HttpStatus.CREATED);
         } else {
