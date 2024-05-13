@@ -1,6 +1,5 @@
 package com.grl.TFG_API.model.entity;
 
-import com.grl.TFG_API.model.enums.PaymentMethod;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +15,8 @@ public class Order implements Serializable {
     private Double price;
     @Column(name = "payment_method")
     private String paymentMethod;
+    @Column(name = "state")
+    private String state;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Item> items;
     @ManyToOne
@@ -26,10 +27,11 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Integer id, Double price, String paymentMethod, List<Item> items, User user) {
+    public Order(Integer id, Double price, String paymentMethod, String state, List<Item> items, User user) {
         this.id = id;
         this.price = price;
         this.paymentMethod = paymentMethod;
+        this.state = state;
         this.items = items;
         this.user = user;
     }
@@ -74,12 +76,21 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", price=" + price +
-                ", paymentMethod=" + paymentMethod +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", state='" + state + '\'' +
                 ", items=" + items +
                 ", user=" + user.getName() +
                 '}';
