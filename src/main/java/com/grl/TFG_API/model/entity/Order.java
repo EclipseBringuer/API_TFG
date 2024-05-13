@@ -14,9 +14,8 @@ public class Order implements Serializable {
     private Integer id;
     @Column(name = "price")
     private Double price;
-    @Enumerated(EnumType.STRING)
     @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Item> items;
     @ManyToOne
@@ -27,7 +26,7 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Integer id, Double price, PaymentMethod paymentMethod, List<Item> items, User user) {
+    public Order(Integer id, Double price, String paymentMethod, List<Item> items, User user) {
         this.id = id;
         this.price = price;
         this.paymentMethod = paymentMethod;
@@ -51,11 +50,11 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
