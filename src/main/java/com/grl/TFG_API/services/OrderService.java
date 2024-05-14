@@ -27,16 +27,18 @@ public class OrderService {
         output.setPrice(newOrderDTO.price());
         output.setUser(newOrderDTO.user());
         output.setPaymentMethod(newOrderDTO.paymentMethod());
+        output.setState(newOrderDTO.state());
+        output.setDelivery(newOrderDTO.delivery());
         for (Item item : output.getItems()) {
             item.setOrder(output);
         }
         return output;
     }
 
-    private NewOrderDTO convertOrderToDTO(Order order){
+    private NewOrderDTO convertOrderToDTO(Order order) {
         for (Item item : order.getItems()) {
             item.setOrder(null);
         }
-        return new NewOrderDTO(order.getId(), order.getPrice(), order.getPaymentMethod(), order.getItems(), null);
+        return new NewOrderDTO(order.getId(), order.getPrice(), order.getPaymentMethod(), order.getItems(), null, order.getState(), order.getDelivery());
     }
 }

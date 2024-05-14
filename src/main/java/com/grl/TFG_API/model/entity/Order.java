@@ -15,6 +15,8 @@ public class Order implements Serializable {
     private Double price;
     @Column(name = "payment_method")
     private String paymentMethod;
+    @Column(name = "delivery")
+    private String delivery;
     @Column(name = "state")
     private String state;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -27,10 +29,11 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Integer id, Double price, String paymentMethod, String state, List<Item> items, User user) {
+    public Order(Integer id, Double price, String paymentMethod, String delivery, String state, List<Item> items, User user) {
         this.id = id;
         this.price = price;
         this.paymentMethod = paymentMethod;
+        this.delivery = delivery;
         this.state = state;
         this.items = items;
         this.user = user;
@@ -84,12 +87,21 @@ public class Order implements Serializable {
         this.state = state;
     }
 
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", price=" + price +
                 ", paymentMethod='" + paymentMethod + '\'' +
+                ", delivery='" + delivery + '\'' +
                 ", state='" + state + '\'' +
                 ", items=" + items +
                 ", user=" + user.getName() +
