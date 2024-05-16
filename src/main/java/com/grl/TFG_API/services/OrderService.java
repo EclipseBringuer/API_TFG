@@ -6,6 +6,8 @@ import com.grl.TFG_API.model.entity.Order;
 import com.grl.TFG_API.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -18,6 +20,11 @@ public class OrderService {
 
     public NewOrderDTO createNewOrder(NewOrderDTO newOrderDTO) {
         return convertOrderToDTO(repository.save(convertOrderDTOToOrder(newOrderDTO)));
+    }
+
+    public List<NewOrderDTO> getOrdersByUserId(Integer userId) {
+        return repository.getOrderByUserId(userId).stream()
+                .map(this::convertOrderToDTO).collect(Collectors.toList());
     }
 
     private Order convertOrderDTOToOrder(NewOrderDTO newOrderDTO) {
