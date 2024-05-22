@@ -1,8 +1,7 @@
 package com.grl.TFG_API.services;
 
 import com.grl.TFG_API.model.dto.NewOrderDTO;
-import com.grl.TFG_API.model.entity.Item;
-import com.grl.TFG_API.model.entity.Order;
+import com.grl.TFG_API.model.dto.OrderInfoDTO;
 import com.grl.TFG_API.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,40 +11,28 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
     private final OrderRepository repository;
+    private final DTOTransformationService transformator;
 
     @Autowired
-    public OrderService(OrderRepository repository) {
+    public OrderService(OrderRepository repository, DTOTransformationService transformator) {
         this.repository = repository;
+        this.transformator = transformator;
     }
 
     public NewOrderDTO createNewOrder(NewOrderDTO newOrderDTO) {
-        return convertOrderToDTO(repository.save(convertOrderDTOToOrder(newOrderDTO)));
+        return transformator.convertOrderToNewDTO(repository.save(transformator.convertOrderNewDTOToOrder(newOrderDTO)));
     }
 
     public List<NewOrderDTO> getOrdersByUserId(Integer userId) {
         return repository.getOrderByUserId(userId).stream()
-                .map(this::convertOrderToDTO).collect(Collectors.toList());
+                .map(transformator::convertOrderToNewDTO).collect(Collectors.toList());
     }
 
-    private Order convertOrderDTOToOrder(NewOrderDTO newOrderDTO) {
-        Order output = new Order();
-        output.setId(newOrderDTO.id());
-        output.setItems(newOrderDTO.items());
-        output.setPrice(newOrderDTO.price());
-        output.setUser(newOrderDTO.user());
-        output.setPaymentMethod(newOrderDTO.paymentMethod());
-        output.setState(newOrderDTO.state());
-        output.setDelivery(newOrderDTO.delivery());
-        for (Item item : output.getItems()) {
-            item.setOrder(output);
-        }
-        return output;
+    public List<OrderInfoDTO> getAllNotCompleted() {
+        return repository.getAllNotCompleted().stream().map(transformator::convertOrderToInfoDTO).collect(Collectors.toList());
     }
 
-    private NewOrderDTO convertOrderToDTO(Order order) {
-        for (Item item : order.getItems()) {
-            item.setOrder(null);
-        }
-        return new NewOrderDTO(order.getId(), order.getPrice(), order.getPaymentMethod(), order.getItems(), null, order.getState(), order.getDelivery());
+    public OrderInfoDTO updateState(Integer id, String state) {
+        return transformator.convertOrderToInfoDTO(repository.findById(repository.updateOrderByState(id, state)).get());
     }
 }

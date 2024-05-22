@@ -1,12 +1,14 @@
 package com.grl.TFG_API.controllers;
 
 import com.grl.TFG_API.model.dto.NewOrderDTO;
+import com.grl.TFG_API.model.dto.OrderInfoDTO;
 import com.grl.TFG_API.services.OrderService;
 import com.grl.TFG_API.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -28,6 +30,24 @@ public class OrderController {
     public ResponseEntity<List<NewOrderDTO>> findOrdersByUserId(@RequestParam("token") String token, @RequestParam("id") Integer userId) {
         if (SecurityService.isTokenValid(token)) {
             return new ResponseEntity<>(service.getOrdersByUserId(userId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/getAllNotCompleted")
+    public ResponseEntity<List<OrderInfoDTO>> getAllNotCompleted(@RequestParam("token") String token) {
+        if (SecurityService.isTokenValid(token)) {
+            return new ResponseEntity<>(service.getAllNotCompleted(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PutMapping("updateState/{id}")
+    public ResponseEntity<OrderInfoDTO> updateState(@RequestParam("token") String token, @RequestParam("state") String state, @PathVariable Integer id) {
+        if (SecurityService.isTokenValid(token)) {
+            return new ResponseEntity<>(service.updateState(id, state), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
