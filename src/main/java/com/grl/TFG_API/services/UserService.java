@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final UserRepository repository;
+    private final DTOTransformationService transformator;
 
     @Autowired
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, DTOTransformationService transformator) {
         this.repository = repository;
+        this.transformator = transformator;
     }
 
     public User getByCredentials(String gmail, String password) {
@@ -28,18 +30,8 @@ public class UserService {
     public User saveNewUser(NewUserDTO newUser) {
         var output = new User();
         if(!repository.existsByGmail(newUser.gmail())){
-            output = repository.save(convertNewUserDTOIntoUser(newUser));
+            output = repository.save(transformator.convertNewUserDTOIntoUser(newUser));
         }
         return output;
-    }
-
-    private User convertNewUserDTOIntoUser(NewUserDTO newUserDTO) {
-        User user = new User();
-        user.setName(newUserDTO.name());
-        user.setAddress(newUserDTO.address());
-        user.setPassword(newUserDTO.password());
-        user.setPhone(newUserDTO.phone());
-        user.setGmail(newUserDTO.gmail());
-        return user;
     }
 }
