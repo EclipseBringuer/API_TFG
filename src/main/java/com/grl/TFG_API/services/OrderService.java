@@ -5,6 +5,7 @@ import com.grl.TFG_API.model.dto.OrderInfoDTO;
 import com.grl.TFG_API.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ public class OrderService {
     }
 
     public OrderInfoDTO updateState(Integer id, String state) {
-        return transformator.convertOrderToInfoDTO(repository.findById(repository.updateOrderByState(id, state)).get());
+        repository.updateOrderByState(id, state);
+        return transformator.convertOrderToInfoDTO(repository.findById(id).get());
     }
 }
