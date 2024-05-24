@@ -12,6 +12,7 @@ public class Utility {
      * Actualmente este método no es usado ya que al subirlo el railway
      * provoca una excepción en el despliegue por la configuración de los servidores.
      * Sin embargo en local se puede llamar y funciona perfectamente, desplegando swagger.
+     * </p>
      */
     public static void openDocumentation() {
         try {
