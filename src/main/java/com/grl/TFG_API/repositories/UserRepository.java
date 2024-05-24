@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Interfaz del repositorio para gestionar entidades {@link User}.
  * <p>
- * Esta interfaz extiende JpaRepository para proporcionar operaciones CRUD para las entidades Order.
+ * Esta interfaz extiende JpaRepository para proporcionar operaciones CRUD para las entidades User.
  * </p>
  */
 @Repository
