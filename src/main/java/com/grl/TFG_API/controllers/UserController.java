@@ -10,12 +10,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los usuarios en la API.
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService service;
 
+    /**
+     * Devuelve un usuario por sus credenciales.
+     *
+     * @param token    Token de seguridad para autorización.
+     * @param gmail    Correo electrónico del usuario.
+     * @param password Contraseña del usuario.
+     * @return ResponseEntity con el usuario correspondiente o estado de error si la autorización falla.
+     */
     @Operation(summary = "Devuelve un usuario por sus credenciales")
     @GetMapping("/{gmail}/{password}")
     public ResponseEntity<User> getUserByCredentials(@RequestParam("token") String token, @PathVariable String gmail, @PathVariable String password) {
@@ -26,6 +37,13 @@ public class UserController {
         }
     }
 
+    /**
+     * Guarda un nuevo usuario en la base de datos y lo devuelve con el ID actualizado.
+     *
+     * @param token   Token de seguridad para autorización.
+     * @param newUser DTO del nuevo usuario a crear.
+     * @return ResponseEntity con el usuario creado o estado de error si la autorización falla.
+     */
     @Operation(summary = "Guarda un nuevo usuario en la base de datos y lo devuelve con el id actualizado")
     @PostMapping("/new")
     public ResponseEntity<User> createNewUser(@RequestParam("token") String token, @RequestBody NewUserDTO newUser) {
