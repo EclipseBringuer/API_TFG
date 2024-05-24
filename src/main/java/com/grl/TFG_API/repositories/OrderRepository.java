@@ -39,6 +39,18 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> getAllNotCompleted();
 
     /**
+     * Recupera una lista de pedidos que no están completados ni cancelados en base al id del usuario.
+     * <p>
+     * Este método utiliza una consulta JPQL personalizada para obtener pedidos
+     * donde el estado no es 'COMPLETED' ni 'CANCELED' ademas de filtrar por el id del usuario.
+     * </p>
+     *
+     * @return una lista de pedidos que no están completados ni cancelados.
+     */
+    @Query("SELECT o FROM Order o WHERE o.state NOT IN ('COMPLETED', 'CANCELED') AND o.user.id = :id")
+    List<Order> getAllNotCompletedByUserId(@Param("id") Integer userId);
+
+    /**
      * Actualiza el estado de un pedido por su ID.
      * <p>
      * Este método utiliza una consulta JPQL personalizada para actualizar el estado de un pedido

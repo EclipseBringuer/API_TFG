@@ -51,6 +51,17 @@ public class OrderService {
     }
 
     /**
+     * Obtiene todas las órdenes no completadas o canceladas de un usuario por su ID.
+     *
+     * @param userId El ID del usuario.
+     * @return Una lista de DTOs de las órdenes del usuario.
+     */
+    public List<NewOrderDTO> getOrdersNotCompletedByUserId(Integer userId) {
+        return repository.getAllNotCompletedByUserId(userId).stream()
+                .map(transformator::convertOrderToNewDTO).collect(Collectors.toList());
+    }
+
+    /**
      * Obtiene todas las órdenes que no están completadas.
      *
      * @return Una lista de DTOs de las órdenes no completadas.

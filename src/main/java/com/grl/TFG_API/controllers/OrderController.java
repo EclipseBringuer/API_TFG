@@ -53,6 +53,22 @@ public class OrderController {
     }
 
     /**
+     * Busca todos los pedidos no completados ni cancelados de un usuario dado su ID.
+     *
+     * @param token  Token de seguridad para autorización.
+     * @param userId ID del usuario.
+     * @return ResponseEntity con la lista de pedidos del usuario o estado de error si la autorización falla.
+     */
+    @GetMapping("/getAllNotCompletedById")
+    public ResponseEntity<List<NewOrderDTO>> findOrdersNotCompletedByUserId(@RequestParam("token") String token, @RequestParam("id") Integer userId) {
+        if (SecurityService.isTokenValid(token)) {
+            return new ResponseEntity<>(service.getOrdersNotCompletedByUserId(userId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
      * Obtiene todos los pedidos no completados.
      *
      * @param token Token de seguridad para autorización.
