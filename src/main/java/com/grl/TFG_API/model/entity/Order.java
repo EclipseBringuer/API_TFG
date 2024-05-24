@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Clase que representa un pedido en el sistema.
+ */
 @Entity
 @Table(name = "`order`")
 public class Order implements Serializable {
@@ -25,10 +28,24 @@ public class Order implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /**
+     * Constructor por defecto de la clase Order.
+     */
     public Order(){
 
     }
 
+    /**
+     * Constructor de la clase Order.
+     *
+     * @param id            El identificador del pedido.
+     * @param price         El precio del pedido.
+     * @param paymentMethod El método de pago del pedido.
+     * @param delivery      El método de entrega del pedido.
+     * @param state         El estado del pedido.
+     * @param items         La lista de ítems del pedido.
+     * @param user          El usuario asociado al pedido.
+     */
     public Order(Integer id, Double price, String paymentMethod, String delivery, String state, List<Item> items, User user) {
         this.id = id;
         this.price = price;
@@ -39,6 +56,7 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    // Métodos getters y setters...
     public Integer getId() {
         return id;
     }
@@ -95,6 +113,7 @@ public class Order implements Serializable {
         this.delivery = delivery;
     }
 
+    //Método sobreescrito toString
     @Override
     public String toString() {
         return "Order{" +

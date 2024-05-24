@@ -3,6 +3,9 @@ package com.grl.TFG_API.model.entity;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Clase que representa un elemento individual en un pedido.
+ */
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
@@ -19,10 +22,21 @@ public class Item implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    /**
+     * Constructor por defecto de la clase Item.
+     */
     public Item(){
 
     }
 
+    /**
+     * Constructor de la clase Item.
+     *
+     * @param id      El identificador del elemento.
+     * @param amount  La cantidad del elemento.
+     * @param order   El pedido al que pertenece el elemento.
+     * @param product El producto asociado al elemento.
+     */
     public Item(Integer id, Integer amount, Order order, Product product) {
         this.id = id;
         this.amount = amount;
@@ -30,6 +44,7 @@ public class Item implements Serializable {
         this.product = product;
     }
 
+    // Métodos getters y setters...
     public Integer getId() {
         return id;
     }
@@ -62,6 +77,7 @@ public class Item implements Serializable {
         this.product = product;
     }
 
+    //Método sobreescrito toString
     @Override
     public String toString() {
         return "Item{" +

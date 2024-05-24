@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa a un usuario en el sistema.
+ */
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -25,6 +28,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 
+    /**
+     * Constructor por defecto de la clase User.
+     */
     public User() {
         this.id = 0;
         this.name = "";
@@ -35,6 +41,17 @@ public class User implements Serializable {
         this.orders = new ArrayList<>();
     }
 
+    /**
+     * Constructor de la clase User.
+     *
+     * @param id       El identificador del usuario.
+     * @param name     El nombre del usuario.
+     * @param gmail    El correo electrónico del usuario.
+     * @param password La contraseña del usuario.
+     * @param phone    El número de teléfono del usuario.
+     * @param address  La dirección del usuario.
+     * @param orders   La lista de pedidos asociados al usuario.
+     */
     public User(Integer id, String name, String gmail, String password, String phone, String address, List<Order> orders) {
         this.id = id;
         this.name = name;
@@ -45,6 +62,7 @@ public class User implements Serializable {
         this.orders = orders;
     }
 
+    // Métodos getters y setters...
     public Integer getId() {
         return id;
     }
@@ -101,6 +119,7 @@ public class User implements Serializable {
         this.orders = orders;
     }
 
+    //Método sobreescrito toString
     @Override
     public String toString() {
         return "User{" +

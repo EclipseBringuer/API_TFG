@@ -3,6 +3,9 @@ package com.grl.TFG_API.model.entity;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Clase que representa un producto en la base de datos.
+ */
 @Entity
 @Table(name = "product")
 public class Product implements Serializable {
@@ -21,10 +24,23 @@ public class Product implements Serializable {
     @Column(name = "category")
     private String category;
 
+    /**
+     * Constructor por defecto de la clase Product.
+     */
     public Product() {
 
     }
 
+    /**
+     * Constructor de la clase Product.
+     *
+     * @param id          El identificador del producto.
+     * @param name        El nombre del producto.
+     * @param price       El precio del producto.
+     * @param photo       La foto del producto.
+     * @param description La descripción del producto.
+     * @param category    La categoría del producto.
+     */
     public Product(Integer id, String name, Double price, Integer photo, String description, String category) {
         this.id = id;
         this.name = name;
@@ -34,6 +50,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    // Métodos getters y setters...
     public Integer getId() {
         return id;
     }
@@ -82,6 +99,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    //Método sobreescrito toString
     @Override
     public String toString() {
         return "Product{" +
