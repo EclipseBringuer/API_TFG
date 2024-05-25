@@ -62,7 +62,7 @@ public class UserController {
      * @return ResponseEntity con el usuario actualizado o estado de error si la autorización falla.
      */
     @Operation(summary = "Actualiza un usuario en la base de datos y lo devuelve con los campos actualizados")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestParam("token") String token, @RequestBody NewUserDTO updatedUser) {
         if (SecurityService.isTokenValid(token)) {
             return new ResponseEntity<>(service.updateUser(updatedUser), HttpStatus.CREATED);
