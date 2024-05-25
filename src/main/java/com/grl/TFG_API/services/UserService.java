@@ -56,4 +56,14 @@ public class UserService {
         }
         return output;
     }
+
+    /**
+     * Actualiza un usuario en la base de datos.
+     *
+     * @param updatedUser DTO que contiene la información del nuevo usuario.
+     * @return El usuario guardado, o un nuevo objeto User si el correo electrónico ya existe.
+     */
+    public User updateUser(NewUserDTO updatedUser) {
+        return  repository.save(transformator.convertNewUserDTOIntoUser(updatedUser));
+    }
 }
