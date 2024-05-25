@@ -28,4 +28,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return true si el usuario existe, false si no.
      */
     Boolean existsByGmail(String gmail);
+
+    /**
+     * Trae al usuario con ese gmail.
+     *
+     * @param gmail El correo electrónico del usuario.
+     * @return Devuelve el usuario con ese gmail.
+     */
+    User findByGmail(String gmail);
 }

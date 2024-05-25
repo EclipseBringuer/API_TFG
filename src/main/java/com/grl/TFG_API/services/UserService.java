@@ -64,6 +64,9 @@ public class UserService {
      * @return El usuario guardado, o un nuevo objeto User si el correo electrónico ya existe.
      */
     public User updateUser(NewUserDTO updatedUser) {
-        return  repository.save(transformator.convertNewUserDTOIntoUser(updatedUser));
+        var user = repository.findByGmail(updatedUser.gmail());
+        user.setAddress(updatedUser.address());
+        user.setPhone(updatedUser.phone());
+        return  repository.save(user);
     }
 }
